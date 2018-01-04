@@ -5,7 +5,7 @@
 - what is Higher order Functions?
 - what is side effects?
 
-<h2>What is functional Programming ?<h2><br>
+<h2>What is functional Programming ?</h2><br>
 <p>Functional Programming is a programming paradigm - its a style of building the structure and elements within the program that treats computation as evaluation of <b>mathematical functions</b> and avoids changing the state and <b>mutable data</b>.
 Programming paradigm - how the program is architected ( procedural, object-oriented, metaprogramming - using function as the data and altering the program on how its run).</p><br>
 
@@ -127,3 +127,108 @@ in case of functional programming - eg: Math.max(10,5) - 10,5 - are the applicat
     return accumulator + n;
     },0)
    ```
+<hr></hr>
+<b> Power of Functions </b>
+- passing functions are parameter to other functions
+For ex: products.filter((p) => {return p.isActive})
+Here (p) => {return p.active} is a function  that is a parameter for filter.
+
+- returning functions
+<h2> The currying </h2>
+Converting the function that can take multiple parameters into series of functions that take single parameter
+
+```
+const byId = (id) => {
+  return (item) => {
+    return item.id == id ;
+   }
+ }
+ ```
+ can be called as products.find(byId(2))
+ 
+ Here find takes only one parameter. 
+ so pass byId(2) as a param to find which takes id ,that function returns (item) => { return item.id == 2}. 
+ then products.find((item) => { return item.id == 2 })
+ 
+ <hr> </hr>
+ <b> Difference between currying and partial application </b>
+ currying = convert the function into series of function 
+ partial application - supply less arguments than required to a function
+ 
+ Ramda curry example
+ ```
+ const add = R.curry((a,b,c) => {
+ return a+b+c
+ })
+ add(1)(2)(3)
+ ```
+ 
+ Note: always create helper functions to make your code more readable </br>
+ <hr> </hr>
+ <h2> Pure Functions </h2>
+ - doesnot depend on any data that is being passed
+ - doesn't affect any other data other than what is returned
+ - returns a copy of data rather than changing the original data itself
+ - avoids side effect
+ 
+ ex:
+ array.push(3) is not a pure function as it manipulates the original array
+ whereas .map is a pure function as it returns a new list
+ 
+the other way of determining the pure functions is to see if it returning any value, if not then mostly it is not a pure function
+
+<hr> </hr>
+<h2> Function Composition </h2>
+Note: inheritance eg: animal , composition eg: car
+
+```
+var diff = difference(1,2)
+var value = abs(diff)
+
+abs(difference(1,2))
+```
+Function composition is nothing but combining 2 or more function to form a new function
+
+Ramda Pipe - password reset example 
+```
+const isEmptyString = R.pipe(
+  R.defaultTo(''),
+  R.trim,
+  R.isEmpty
+)
+isEmptyString('abc')
+```
+There is also R.compose function 
+```
+const isEmptyString = R.compose(
+  R.trim,
+  R.isEmpty,
+  R.defaultTo('')
+)
+```
+The difference between R.pipe = top to bottom , R.compose = bottom up.
+With function composition you can reduce the unnecessary temporary variables.
+<hr> </hr>
+<h2> Refactor </h2>
+
+step1: assign functions to variables (first class functions),  create helper functions that can be reused
+step2: use function composition
+<hr> </hr>
+<h2> side effects can be harmful </h2>
+what is side effect ?
+- modifying state outside its scope
+example
+```
+if(user.password != saltedpassword(password)){
+ this.invalidLogin++;
+ }
+ ```
+ this causes side effect . here the everytime user attempts to login with a wrong password the invalidlogin counter gets incremented , its not pure because it has not changed the state of the object.
+ 
+ ```
+ $http.get('myaccount/users')
+ ```
+ there is no guarentee , users can be modified or deleted during the request
+
+
+ 
