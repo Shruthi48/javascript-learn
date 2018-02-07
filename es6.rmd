@@ -1,1 +1,26 @@
 <h3> New types object extensions </h3>
+
+<b> Symbol </b> </br>
+<p>Symbol is a unique and immutable data type and may be used as identifier for object properties</p> </br>
+
+use case :
+- to provide the unique id ( it is difficult to predict the unique id that is generated or inspect and know what it is)
+- when you want to add properties to all the classes in your software project and keep them unique , for security reasons
+- maybe to avoid overlapping
+
+```
+const eventSymbol = Symbol('resize event');
+console.log(typeof eventSymbol) // symbol
+console.log(eventSymbol.toString()) // resize event
+```
+<p style={{ color: green}}> when a string is passed to Symbol constructor function a new symbol is created with the unique id with the type being <b>symbol</b></p>
+
+```
+const s1 = Symbol('event');
+const s2 = Symbol('event');
+console.log( s1 === s2 ) // false
+
+```
+<p> hence the symbols created are unique </p>
+
+
