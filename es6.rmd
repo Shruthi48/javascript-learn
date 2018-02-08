@@ -23,4 +23,9 @@ console.log( s1 === s2 ) // false
 ```
 <p> hence the symbols created are unique </p>
 
+<hr></hr>
 
+<h3> Iterators , Generators and Promises </h3>
+
+<b> Iterators </b> <br>
+<p> Iterator is an object that allows us to iterate through object , arrays and other enummerable types </p>
