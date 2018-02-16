@@ -29,3 +29,54 @@ console.log( s1 === s2 ) // false
 
 <b> Iterators </b> <br>
 <p> Iterator is an object that allows us to iterate through object , arrays and other enummerable types </p>
+
+
+#todo
+
+<hr></hr>
+
+<h3> Arrays </h3>
+
+Array(9000) - creates array of length 9000
+Array.of(9000) - creates array of length 1 with value 9000;
+Array.from( array, function) - use this to perform any operations on array 
+example: 
+```
+let temp = [800, 801, 802];
+let result = Array.from(temp, v => v+100)
+console.log(result) // [900, 901, 902]
+```
+passing the this context using third argument in Array.from
+```
+let result = Array.from(temp, function(v) {
+return v+ this.adjustment
+},{adjustment: 50});
+console.log(result) //[850, 851, 852]
+```
+the same cannot be achieved using an arrow function because use cannot change the this , it always points to the context that is invoking it .
+
+```
+let result = Array.from(temp, v =>  v+ this.adjustment, {adjustment: 50});
+console.log(result) //[NaN, NaN, NaN]
+```
+fill - fills the entire array with one value
+```
+temp.fill(900) // [900, 900, 900]
+temp.fill(900,1) // [800, 900, 900] - starts filling from the index1
+temp.fill(900,1,2) // [800, 900, 802] - start at index 1 and end at index 2
+temp.fill(900, -1) //[800, 801, 900] - fills at the end
+```
+find - returns the first item that matches 
+```
+temp.find(array => array >= 801) // returns 801
+```
+findIndex - returns index , you can also pass the value to locate in index using this rather than creating a new variable.
+```
+let result = temp.findIndex(function(value, index, array) 
+{
+ return value === this;
+ }
+ ,801);
+ console.log(result) // 1
+ ```
+ <span style={{color: green}}> Green</span>
